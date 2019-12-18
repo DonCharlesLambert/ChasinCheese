@@ -8,9 +8,20 @@ class ChasinCheese(object):
         self.root = Tk()
         self.canvas = Canvas(self.root, width=400, height=400)
 
+        self.bg_image = PhotoImage(file=r'images\floor.png')
+        self.background = self.canvas.create_image(0, 0, image=self.bg_image, anchor="nw")
         self.rat = Rat(self.canvas)
         self.AI = AIRat(self.canvas)
         self.cheese = Cheese(self.canvas)
+
+        self.white_image = PhotoImage(file=r'images\white.png')
+        self.white_image = self.white_image.subsample(10, 10)
+        self.white = self.canvas.create_image(10, 330, image=self.white_image, anchor="nw")
+        self.black_image = PhotoImage(file=r'images\black.png')
+        self.black_image = self.black_image.subsample(10, 10)
+        self.black = self.canvas.create_image(360, 330, image=self.black_image, anchor="nw")
+        self.score_me = self.canvas.create_text(60, 350, text=self.rat.score, font=("Purisa", 32), fill="white")
+        self.score_AI = self.canvas.create_text(350, 350, text=self.AI.score, font=("Purisa", 32), fill="white")
 
         self.canvas.bind("<KeyPress>", self.keydown)
         self.canvas.bind("<KeyRelease>", self.keyup)
@@ -30,9 +41,20 @@ class ChasinCheese(object):
             self.rat.animate()
             self.AI.animate(self.cheese)
             time.sleep(0.1)
-            if self.captured(self.rat, self.cheese) or self.captured(self.AI, self.cheese):
+            rat_cap = self.captured(self.rat, self.cheese)
+            ai_cap = self.captured(self.AI, self.cheese)
+            if rat_cap or ai_cap:
                 self.cheese.get_ate()
                 self.cheese = Cheese(self.canvas)
+                if rat_cap:
+                    self.rat.eat_cheese()
+                else:
+                    self.AI.eat_cheese()
+                self.update_score()
+
+    def update_score(self):
+        self.canvas.itemconfig(self.score_me, text=self.rat.score)
+        self.canvas.itemconfig(self.score_AI, text=self.AI.score)
 
     def captured(self, rat, cheese):
         if cheese.pos[0] - 15 <= rat.pos[0] <= cheese.pos[0] + cheese.size[0] + 15:
@@ -59,8 +81,13 @@ class AbstractRat:
         self.pos = canvas.coords(self.rat)
         self.animation_number = 0
         self.direction = 3
+        self.speed = 7.5
+        self.score = 0
         self.is_stopped = True
         self.canvas = canvas
+
+    def eat_cheese(self):
+        self.score += 1
 
     def move(self):
         pass
@@ -129,16 +156,16 @@ class AIRat(AbstractRat):
         self.is_stopped = False
         x, y = 0, 0
         if cheese.pos[1] + 15 < self.pos[1]:
-            x, y = 0, -10
+            x, y = 0, -self.speed
             self.direction = self.UP
         elif cheese.pos[1] - 15 > self.pos[1]:
-            x, y = 0, 10
+            x, y = 0, self.speed
             self.direction = self.DOWN
         elif cheese.pos[0] + 15 < self.pos[0]:
-            x, y = -10, 0
+            x, y = -self.speed, 0
             self.direction = self.LEFT
         elif cheese.pos[0] - 15 > self.pos[0]:
-            x, y = 10, 0
+            x, y = self.speed, 0
             self.direction = self.RIGHT
         self.canvas.move(self.rat, x, y)
         self.pos = self.canvas.coords(self.rat)
@@ -148,10 +175,11 @@ class AIRat(AbstractRat):
         self.move(cheese)
         super(AIRat, self).animate()
 
+
 class Cheese:
     def __init__(self, canvas):
         self.sprite = PhotoImage(file=r'images\cheese.png')
-        self.sprite = self.sprite.subsample(40, 40)
+        self.sprite = self.sprite.subsample(35, 35)
         self.cheese = canvas.create_image(random.randint(0, 375), random.randint(0, 375),
                                           image=self.sprite, anchor="nw")
         self.size = (self.sprite.width(), self.sprite.height())
