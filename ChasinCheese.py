@@ -1,6 +1,7 @@
 from tkinter import *
 import time
 import random
+import winsound
 
 
 class ChasinCheese(object):
@@ -13,6 +14,8 @@ class ChasinCheese(object):
         self.rat = Rat(self.canvas)
         self.AI = AIRat(self.canvas)
         self.cheese = Cheese(self.canvas)
+
+        winsound.PlaySound(r'music\flex.wav', winsound.SND_ALIAS | winsound.SND_ASYNC)
 
         self.white_image = PhotoImage(file=r'images\white.png')
         self.white_image = self.white_image.subsample(10, 10)
