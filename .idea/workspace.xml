@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="335b97b1-d77c-44d9-a511-ab931634fa0b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ChasinCheese.py" beforeDir="false" afterPath="$PROJECT_DIR$/ChasinCheese.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,10 +16,15 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ChasinCheese.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+            <state relative-caret-position="240">
+              <caret line="202" column="18" lean-forward="true" selection-start-line="202" selection-start-column="18" selection-end-line="202" selection-end-column="18" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
+                <element signature="e#98#2557#0" />
+                <element signature="e#2583#4221#0" />
+                <element signature="e#4252#5503#0" />
+                <element signature="e#5536#6397#0" />
+                <element signature="e#6418#6924#0" />
               </folding>
             </state>
           </provider>
@@ -46,6 +52,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -57,7 +64,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -165,10 +171,15 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/ChasinCheese.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        <state relative-caret-position="240">
+          <caret line="202" column="18" lean-forward="true" selection-start-line="202" selection-start-column="18" selection-end-line="202" selection-end-column="18" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
+            <element signature="e#98#2557#0" />
+            <element signature="e#2583#4221#0" />
+            <element signature="e#4252#5503#0" />
+            <element signature="e#5536#6397#0" />
+            <element signature="e#6418#6924#0" />
           </folding>
         </state>
       </provider>

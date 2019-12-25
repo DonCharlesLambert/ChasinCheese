@@ -5,33 +5,38 @@ import winsound
 
 
 class ChasinCheese(object):
-    def __init__(self):
-        self.root = Tk()
+    def __init__(self, root):
+        self.root = root
         self.canvas = Canvas(self.root, width=400, height=400)
 
-        self.bg_image = PhotoImage(file=r'images\floor.png')
-        self.background = self.canvas.create_image(0, 0, image=self.bg_image, anchor="nw")
+        self.images = []
+        self.scoreboard()
         self.rat = Rat(self.canvas)
         self.AI = AIRat(self.canvas)
         self.cheese = Cheese(self.canvas)
 
         winsound.PlaySound(r'music\flex.wav', winsound.SND_ALIAS | winsound.SND_ASYNC)
 
-        self.white_image = PhotoImage(file=r'images\white.png')
-        self.white_image = self.white_image.subsample(10, 10)
-        self.white = self.canvas.create_image(10, 330, image=self.white_image, anchor="nw")
-        self.black_image = PhotoImage(file=r'images\black.png')
-        self.black_image = self.black_image.subsample(10, 10)
-        self.black = self.canvas.create_image(360, 330, image=self.black_image, anchor="nw")
-        self.score_me = self.canvas.create_text(60, 350, text=self.rat.score, font=("Purisa", 32), fill="white")
-        self.score_AI = self.canvas.create_text(350, 350, text=self.AI.score, font=("Purisa", 32), fill="white")
-
         self.canvas.bind("<KeyPress>", self.keydown)
         self.canvas.bind("<KeyRelease>", self.keyup)
         self.canvas.pack()
         self.canvas.focus_set()
         self.root.after(0, self.animation)
-        self.root.mainloop()
+
+    def scoreboard(self):
+        bg_image = PhotoImage(file=r'images\floor.png')
+        background = self.canvas.create_image(0, 0, image=bg_image, anchor="nw")
+
+        white_image = PhotoImage(file=r'images\white.png').subsample(10, 10)
+        white = self.canvas.create_image(10, 330, image=white_image, anchor="nw")
+        black_image = PhotoImage(file=r'images\black.png').subsample(10, 10)
+        black = self.canvas.create_image(360, 330, image=black_image, anchor="nw")
+
+        self.score_me = self.canvas.create_text(60, 350, text=0, font=("Purisa", 32), fill="white")
+        self.score_AI = self.canvas.create_text(350, 350, text=0, font=("Purisa", 32), fill="white")
+
+        self.images.append([bg_image, background, white_image, white, black_image, black])
+
 
     def keydown(self, e):
         self.rat.move(e.char)
@@ -193,4 +198,9 @@ class Cheese:
         self.canvas.delete(self.cheese)
 
 
-ChasinCheese()
+root = Tk()
+# add a menu?
+ChasinCheese(root)
+# add a multiplayer option to og game
+# add a single player maze game
+root.mainloop()
