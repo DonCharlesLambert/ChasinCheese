@@ -4,7 +4,7 @@ import random
 import winsound
 
 
-class ChasinCheese(object):
+class ChasinCheese:
     def __init__(self, root):
         self.root = root
         self.canvas = Canvas(self.root, width=400, height=400)
@@ -21,7 +21,7 @@ class ChasinCheese(object):
         self.canvas.bind("<KeyRelease>", self.keyup)
         self.canvas.pack()
         self.canvas.focus_set()
-        self.root.after(0, self.animation)
+        self.animation()
 
     def scoreboard(self):
         bg_image = PhotoImage(file=r'images\floor.png')
@@ -36,7 +36,6 @@ class ChasinCheese(object):
         self.score_AI = self.canvas.create_text(350, 350, text=0, font=("Purisa", 32), fill="white")
 
         self.images.append([bg_image, background, white_image, white, black_image, black])
-
 
     def keydown(self, e):
         self.rat.move(e.char)
