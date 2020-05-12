@@ -10,5 +10,5 @@ Made using vanilla Python!
 Just clone the repo and get started
 
 ## Info
-Initially finished on 18 December 2019 
+Initially finished on 18 December 2019  
 Revisted on 24th April 2020
