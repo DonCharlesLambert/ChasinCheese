@@ -15,8 +15,6 @@ class ChasinCheese:
         self.AI = AIRat(self.canvas)
         self.cheese = Cheese(self.canvas)
 
-        winsound.PlaySound(r'music\flex.wav', winsound.SND_ALIAS | winsound.SND_ASYNC)
-
         self.canvas.bind("<KeyPress>", self.keydown)
         self.canvas.bind("<KeyRelease>", self.keyup)
         self.canvas.pack()
